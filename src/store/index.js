@@ -8,7 +8,6 @@ import { API_KEY, TMDB_BASE_URL } from "../utils/constants";
 
 const initialState = {
   movies: [],
-  likedmovies:[],
   genresLoaded: false,
   genres: [],
 };
@@ -81,9 +80,9 @@ export const getUsersLikedMovies = createAsyncThunk(
   "netflix/getLiked",
   async (email) => {
     const {
-      data: { likedmovies },
+      data: { movies },
     } = await axios.get(`https://netflix-backend-7b7v9vgvn-uzairk241.vercel.appapi/user/liked/${email}`);
-    return likedmovies;
+    return movies;
   }
 );
 
@@ -112,13 +111,13 @@ const NetflixSlice = createSlice({
       state.movies = action.payload;
     });
     builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
-      state.likedmovies = action.payload;
+      state.movies = action.payload;
     });
     builder.addCase(getUsersLikedMovies.fulfilled, (state, action) => {
-      state.likedmovies = action.payload;
+      state.movies = action.payload;
     });
     builder.addCase(removeMovieFromLiked.fulfilled, (state, action) => {
-      state.likedmovies = action.payload;
+      state.movies = action.payload;
     });
   },
 });
