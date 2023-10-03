@@ -12,11 +12,12 @@ import { firebaseAuth } from "../utils/firebase-config";
 import { useDispatch } from "react-redux";
 import { removeMovieFromLiked } from "../store";
 
-export default React.memo(function Card({ index, movieData, isLiked = false }) {
+export default React.memo(function Card({ index, movieData }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
+  const [isLiked, setisLiked] = useState(false);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) {
@@ -30,6 +31,7 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
         email,
         data: movieData,
       });
+      setisLiked(true)
     } catch (error) {
       console.log(error);
     }
@@ -77,11 +79,12 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
                 {isLiked ? (
                   <BsCheck
                     title="Remove from List"
-                    onClick={() =>
+                    onClick={() =>{
                       dispatch(
                         removeMovieFromLiked({ movieId: movieData.id, email })
-                      )
-                    }
+                        )
+                        setisLiked(false)}
+                      }
                   />
                 ) : (
                   <AiOutlinePlus title="Add to my list" onClick={addToList} />
