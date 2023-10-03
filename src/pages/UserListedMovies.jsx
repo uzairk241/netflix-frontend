@@ -10,11 +10,12 @@ import { getUsersLikedMovies } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import NotAvailable from "../components/NotAvailable"
 export default function UserListedMovies() {
-  const movies = useSelector((state) => state.netflix.movies);
+  const movies = useSelector((state) => state.netflix.likedmovies);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [email, setEmail] = useState(undefined);
+
 useEffect(()=>{
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) setEmail(currentUser.email);
