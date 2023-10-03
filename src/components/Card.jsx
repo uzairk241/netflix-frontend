@@ -6,7 +6,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
 import { BsCheck } from "react-icons/bs";
-// import axios from "axios";
+import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import { useDispatch } from "react-redux";
@@ -24,16 +24,16 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
     } else navigate("/login");
   });
 
-  // const addToList = async () => {
-  //   try {
-  //     await axios.post("http://localhost:5000/api/user/add", {
-  //       email,
-  //       data: movieData,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const addToList = async () => {
+    try {
+      await axios.post("http://localhost:5000/api/user/add", {
+        email,
+        data: movieData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container
