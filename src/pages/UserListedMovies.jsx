@@ -8,20 +8,18 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { getUsersLikedMovies } from "../store";
 import { useDispatch, useSelector } from "react-redux";
-import NotAvailable from "../components/NotAvailable"
+
 export default function UserListedMovies() {
-  const movies = useSelector((state) => state.netflix.likedmovies);
+  const movies = useSelector((state) => state.netflix.movies);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [email, setEmail] = useState(undefined);
-
-useEffect(()=>{
+  
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) setEmail(currentUser.email);
     else navigate("/login");
   });
-},[])
 
   useEffect(() => {
     if (email) {
@@ -40,8 +38,7 @@ useEffect(()=>{
       <div className="content flex column">
         <h1>My List</h1>
         <div className="grid flex">
-          {movies? 
-          movies?.map((movie, index) => {
+          {movies?.map((movie, index) => {
             return (
               <Card
                 movieData={movie}
@@ -50,7 +47,7 @@ useEffect(()=>{
                 isLiked={true}
               />
             );
-          }): <NotAvailable title="List Not Available Please Add Movies to List First"/>}
+          })}
         </div>
       </div>
     </Container>

@@ -12,12 +12,11 @@ import { firebaseAuth } from "../utils/firebase-config";
 import { useDispatch } from "react-redux";
 import { removeMovieFromLiked } from "../store";
 
-export default React.memo(function Card({ index, movieData }) {
+export default React.memo(function Card({ index, movieData, isLiked = false }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
-  const [isLiked, setisLiked] = useState(false);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) {
@@ -27,11 +26,10 @@ export default React.memo(function Card({ index, movieData }) {
 
   const addToList = async () => {
     try {
-      await axios.post("https://netflix-backend-7b7v9vgvn-uzairk241.vercel.app/api/user/add", {
+      await axios.post("https://netflix-backend-amber.vercel.app/api/user/add", {
         email,
         data: movieData,
       });
-      setisLiked(true)
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +55,8 @@ export default React.memo(function Card({ index, movieData }) {
               onClick={() => navigate("/player")}
             />
             <video
-              src='https://res.cloudinary.com/ehizeex-shop/video/upload/v1668377666/NetflixApp/Action_mlw9wx.mp4' 
+              src=''
+              // https://res.cloudinary.com/ehizeex-shop/video/upload/v1668377666/NetflixApp/Action_mlw9wx.mp4
               autoPlay={true}
               loop
               muted
@@ -79,12 +78,11 @@ export default React.memo(function Card({ index, movieData }) {
                 {isLiked ? (
                   <BsCheck
                     title="Remove from List"
-                    onClick={() =>{
+                    onClick={() =>
                       dispatch(
                         removeMovieFromLiked({ movieId: movieData.id, email })
-                        )
-                        setisLiked(false)}
-                      }
+                      )
+                    }
                   />
                 ) : (
                   <AiOutlinePlus title="Add to my list" onClick={addToList} />
@@ -97,7 +95,7 @@ export default React.memo(function Card({ index, movieData }) {
             <div className="genres flex">
               <ul className="flex">
                 {movieData.genres.map((genre) => (
-                  <li key={genre} >{genre}</li>
+                  <li>{genre}</li>
                 ))}
               </ul>
             </div>
@@ -184,3 +182,4 @@ const Container = styled.div`
     }
   }
 `;
+

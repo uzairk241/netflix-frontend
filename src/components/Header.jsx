@@ -17,7 +17,7 @@ export default function Header(props) {
   );
 }
 const StyledHeader = styled.header`
-  padding: 0 4rem;
+  padding: 0 14rem;
   .logo {
     img {
       height: 5rem;
@@ -32,5 +32,7 @@ const StyledHeader = styled.header`
     border-radius: 0.2rem;
     font-weight: bolder;
     font-size: 1.05rem;
-  }
+  } 
+
+
 `;

@@ -81,7 +81,7 @@ export const getUsersLikedMovies = createAsyncThunk(
   async (email) => {
     const {
       data: { movies },
-    } = await axios.get(`https://netflix-backend-7b7v9vgvn-uzairk241.vercel.appapi/user/liked/${email}`);
+    } = await axios.get(`https://netflix-backend-amber.vercel.app/api/user/liked/${email}`);
     return movies;
   }
 );
@@ -91,11 +91,14 @@ export const removeMovieFromLiked = createAsyncThunk(
   async ({ movieId, email }) => {
     const {
       data: { movies },
-    } = await axios.put("https://netflix-backend-7b7v9vgvn-uzairk241.vercel.appapi/user/remove", {
+    } = await axios.put("https://netflix-backend-amber.vercel.app/api/user/remove", {
       email,
       movieId,
-    });
-    return movies;
+    },{
+      headers:"Content-Type : application/json"}
+    );
+    console.log(movies);
+    return movies; 
   }
 );
 
