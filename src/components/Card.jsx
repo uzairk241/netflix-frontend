@@ -55,8 +55,9 @@ export default React.memo(function Card({ index, movieData, isLiked = false }) {
               onClick={() => navigate("/player")}
             />
             <video
-              src=''
-              // https://res.cloudinary.com/ehizeex-shop/video/upload/v1668377666/NetflixApp/Action_mlw9wx.mp4
+              src='
+               https://res.cloudinary.com/ehizeex-shop/video/upload/v1668377666/NetflixApp/Action_mlw9wx.mp4
+              '
               autoPlay={true}
               loop
               muted
