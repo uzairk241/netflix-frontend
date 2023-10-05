@@ -71,6 +71,11 @@ const Container = styled.div`
     .form-container {
       gap: 2rem;
       height: 85vh;
+      .title{
+        h3{
+          font-size: 1.5rem;
+        }
+      }
       .form {
         padding: 2rem;
         background-color: #000000b0;
@@ -97,6 +102,23 @@ const Container = styled.div`
       }
     }
   }
+  @media (max-width:600px) {
+    .content{
+      .form-container{
+
+        .form{
+          width: 80%;
+
+          .container{
+            button{
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+}
+
 `;
 
 export default Login;

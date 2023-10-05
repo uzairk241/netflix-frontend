@@ -121,5 +121,34 @@ const Container = styled.div`
       }
     }
   }
+  @media (max-width:600px) {
+    .hero{
+    img{
+      object-fit: cover;
+    }
+    .container{
+      display: flex;
+       left: 1rem;
+      top: 0;
+      bottom: 0;
+      flex-direction: column;
+       width: 90%;
+        justify-content: center;
+      .logo{
+        img{
+          margin: 0;
+          object-fit: cover;
+        }
+      }
+      .buttons{
+          margin: 2rem 0 0 0 ;
+          button{
+            font-size: 1rem;
+            padding: 10px 20px;
+          }
+      }
+    }
+  }
+}
 `;
 export default Netflix;

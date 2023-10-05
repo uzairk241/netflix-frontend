@@ -27,9 +27,7 @@ export default React.memo(function CardSlider({ data, title }) {
       <h1>{title}</h1>
       <div className="wrapper">
         <div
-          className={`slider-action left ${
-            !showControls ? "none" : ""
-          } flex j-center a-center`}
+          className={`slider-action left flex j-center a-center`}
         >
           <AiOutlineLeft onClick={() => handleDirection("left")} />
         </div>
@@ -39,9 +37,7 @@ export default React.memo(function CardSlider({ data, title }) {
           })}
         </div>
         <div
-          className={`slider-action right ${
-            !showControls ? "none" : ""
-          } flex j-center a-center`}
+          className={`slider-action right flex j-center a-center`}
         >
           <AiOutlineRight onClick={() => handleDirection("right")} />
         </div>
@@ -66,8 +62,8 @@ const Container = styled.div`
     }
     .slider-action {
       position: absolute;
-      z-index: 99;
-      height: 100%;
+      z-index: 10;
+      height:100%;
       top: 0;
       bottom: 0;
       width: 50px;
@@ -84,6 +80,18 @@ const Container = styled.div`
     }
     .right {
       right: 0;
+    }
+  }
+  @media (max-width:600px) {
+    .wrapper {
+
+    .slider-action {
+      height: 115%;
+      }  }
+  }
+  @media (max-width:600px) {
+    h1 {
+    font-size: 1.5rem;
     }
   }
 `;

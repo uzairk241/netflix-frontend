@@ -37,7 +37,7 @@ function Signup() {
       <div className="content">
         <Header login />
         <div className="body flex column a-center j-center">
-          <div className="text flex column">
+          <div className="text textcont flex column">
             <h1>Unlimited movies, TV shows and more.</h1>
             <h4>Watch anywhere. Cancel anytime.</h4>
             <h6>
@@ -139,6 +139,32 @@ const Container = styled.div`
         font-size: 1.05rem;
       }
     }
+  }
+  @media (max-width:600px) {
+    .content{
+    .body{
+      width: 90vw;
+      margin: auto;
+   .text{
+    font-size: 1.2rem;
+   
+      h1{
+        padding: 0;
+      }
+    }
+  .form{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    width: 100%;   
+      input{
+      padding: 0.8rem;
+    font-size: 1rem;
+    }
+  }
+button{
+  font-size: 1rem;
+}}
+  }
   }
 `;
 

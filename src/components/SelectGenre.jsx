@@ -34,4 +34,9 @@ const Select = styled.select`
   font-size: 1.4rem;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
+  @media (max-width:600px) {
+    font-size: 1rem;
+    margin-left: 3rem;
+
+  }
 `;

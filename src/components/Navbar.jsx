@@ -5,6 +5,7 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { firebaseAuth } from "../utils/firebase-config";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 export default function Navbar({ isScrolled }) {
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
@@ -14,10 +15,11 @@ export default function Navbar({ isScrolled }) {
     { name: "Movies", link: "/movies" },
     { name: "My List", link: "/mylist" },
   ];
+  const [ismenuopen,setismenuopen]=useState(false)
 
   return (
-    <Container>
-      <nav className={`${isScrolled ? "scrolled" : ""} flex`}>
+    <Container ismenuopen={ismenuopen} >
+      <nav className={`${isScrolled ? "scrolled" : ""} flex navbar`}>
         <div className="left flex a-center">
           <div className="brand flex a-center j-center">
             <img src={logo} alt="Logo" />
@@ -33,8 +35,11 @@ export default function Navbar({ isScrolled }) {
           </ul>
         </div>
         <div className="right flex a-center">
-          <button onClick={() => signOut(firebaseAuth)}>
+          <button className="power" onClick={() => signOut(firebaseAuth)}>
             <FaPowerOff />
+          </button>
+          <button className="menu" onClick={() => setismenuopen(!ismenuopen)}>
+           {ismenuopen?<AiOutlineClose/>:<AiOutlineMenu />} 
           </button>
         </div>
       </nav>
@@ -54,12 +59,13 @@ const Container = styled.div`
     justify-content: space-between;
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 11;
     padding: 0 4rem;
     align-items: center;
     transition: 0.3s ease-in-out;
     .left {
       gap: 2rem;
+      position: relative;
       .brand {
         img {
           height: 4rem;
@@ -132,5 +138,41 @@ const Container = styled.div`
         }
       }
     }
+    .menu{
+     display :none ;
+    }
   }
+  @media (max-width: 600px) {
+  nav {
+    padding: 0 1rem;
+    .left {
+      ul {
+          opacity: ${props => (props.ismenuopen ? 1 : 0)};
+          transform: translateX(${props => (props.ismenuopen ? '0' : '-100%')}); // Translate when ismenuopen is false
+          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; // Add the transition
+          flex-direction: column;
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 50vw;
+          height: 100vh;
+          background-color: black;
+          padding: 6rem 2rem 0 2rem;
+          align-items: center;
+        }
+    }
+    .right {
+      .power {
+        display: black;
+      }
+      .menu {
+        display: block;
+        svg{
+          color:white
+        }
+      }
+    }
+  }
+ 
+}
 `;
