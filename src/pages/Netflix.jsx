@@ -35,11 +35,17 @@ function Netflix() {
     if (!currentUser) navigate("/login");
   });
 
-  window.onscroll = () => {
-    setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return () => (window.onscroll = null);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <Container>
       <Navbar isScrolled={isScrolled} />
@@ -128,7 +134,7 @@ const Container = styled.div`
     }
     .container{
       display: flex;
-       left: 1rem;
+      left: 1rem;
       top: 0;
       bottom: 0;
       flex-direction: column;
