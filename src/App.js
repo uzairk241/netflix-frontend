@@ -7,10 +7,12 @@ import Player from "./pages/Player";
 import Signup from "./pages/Signup";
 import TVShows from "./pages/TVShows";
 import UserListedMovies from "./pages/UserListedMovies";
+import ScrollToTop from "./components/ScrollToTop.jsx"; // Import the ScrollToTop component
 
 export default function App() {
   return (
     <BrowserRouter>
+          <ScrollToTop />
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
